@@ -5,6 +5,7 @@ import re
 
 """
     Download every post in the given subreddit
+    Reference link: https://www.reddit.com/r/pushshift/comments/i8dlzs/how_to_download_all_posts_from_a_subreddit/
 """
 
 subreddit = 'Europe'
