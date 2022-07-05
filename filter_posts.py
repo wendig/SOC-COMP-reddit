@@ -14,12 +14,13 @@ def filter_file(a, b, keyword):
 
     _df = _df.drop_duplicates()
 
-    _df = _df[(_df.title.str.contains(keyword))]
+    _df = _df[(_df.title.str.contains('migrant') | _df.title.str.contains('refugee'))]
 
     _df.to_csv(b, index=False)
 
 
-old_file = 'Europe_submission_1653044298'
-new_file = old_file.replace('submission', 'filtered_submission')
+keyword = 'refugee_or_migrant'
+old_file = 'Europe_submission_1655215516'
+new_file = old_file.replace('submission', 'filtered_submission_{}'.format(keyword))
 
-filter_file(old_file + '.csv', new_file + '.csv', 'migrant')
+filter_file(old_file + '.csv', new_file + '.csv', keyword)

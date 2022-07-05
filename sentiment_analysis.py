@@ -11,7 +11,9 @@ import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.corpus import stopwords
 import re
+import demoji
 
+# demoji.download_codes()
 
 def format_str(in_str):
     return re.sub('[^a-zA-Z ]+', '', in_str)  # keep only letters
@@ -42,9 +44,9 @@ import pandas as pd
 
 subreddit = 'Europe'
 text_type = 'comment'
-TIMESTAMPS = '1653061928_1653044298'
+TIMESTAMPS = '1655707345_1655215516'
 
-df = pd.read_csv('{}_{}_{}.csv'.format(subreddit, text_type, TIMESTAMPS))
+df = pd.read_csv('{}_{}_{}.csv'.format(subreddit, text_type, TIMESTAMPS), sep=';')
 
 df.fillna('', inplace=True)
 
@@ -55,8 +57,15 @@ polarities = {'neg': [], 'neu': [], 'pos': [], 'compound': []}
 nr = df.shape[0]
 
 for index, row in df.iterrows():
+    # Extract emojis
+    symbols = demoji.findall(row['comment_body'])
     # Remove stop words
     text = remove_stop_words(row['comment_body'])
+
+    # If emojis are found add them at the end
+    if bool(symbols):
+        for key in symbols:
+            text += ' ' + symbols[key]
 
     polarity = sid.polarity_scores(text)
 
