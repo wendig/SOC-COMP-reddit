@@ -1,4 +1,4 @@
-# SOC-COMP-reddit
+# Have You Read It? Attitude Change on Reddit Before and After the Start of the Russian Ukrainian War
 
 **Abstract**
 
